@@ -1,0 +1,24 @@
+[package]
+name = "queryz"
+version = "0.1.0"
+edition = "2021"
+description = "A utility library for querying complex objects on the Sui blockchain. Build by SUIZ Protocol."
+license = "MIT"
+repository = "https://github.com/suiz-protocol/queryz"
+readme = "README.md"
+
+[dependencies]
+sui-sdk = { git = "https://github.com/mystenlabs/sui", package = "sui-sdk"}
+sui-types = { git = "https://github.com/mystenlabs/sui", package = "sui-types"}
+sui-json-rpc-types = { git = "https://github.com/mystenlabs/sui", package = "sui-json-rpc-types"}
+anyhow = "1.0"
+tokio = { version = "1.28.1", features = ["full"] }
+async-trait = "0.1.68"
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = "1.0.96"
+futures = "0.3.28"
+bcs = "0.1.6"
+
+[[example]]
+name = "bag_query"
+path = "examples/bag_query.rs"
