@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2021"
 description = "A utility library for querying complex objects on the Sui blockchain. Build by SUIZ Protocol."
 license = "MIT"
-repository = "https://github.com/suiz-protocol/queryz"
+repository = "https://github.com/SuiZProtocol/queryz"
 readme = "README.md"
+authors = ["0xCryptoZen(@SUIZ Protocol)"] 
 
 [dependencies]
 sui-sdk = { git = "https://github.com/mystenlabs/sui", package = "sui-sdk"}
