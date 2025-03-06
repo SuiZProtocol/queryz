@@ -14,7 +14,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-queryz = "0.1.0"
+queryz = { git = "https://github.com/SuiZProtocol/queryz", rev = "main" }
 ```
 
 ## Usage

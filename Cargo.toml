@@ -9,9 +9,9 @@ readme = "README.md"
 authors = ["0xCryptoZen(@SUIZ Protocol)"] 
 
 [dependencies]
-sui-sdk = { git = "https://github.com/mystenlabs/sui", package = "sui-sdk"}
-sui-types = { git = "https://github.com/mystenlabs/sui", package = "sui-types"}
-sui-json-rpc-types = { git = "https://github.com/mystenlabs/sui", package = "sui-json-rpc-types"}
+sui-sdk = { version = "0.0.0", git = "https://github.com/mystenlabs/sui", package = "sui-sdk"}
+sui-types = { version = "0.0.0", git = "https://github.com/mystenlabs/sui", package = "sui-types"}
+sui-json-rpc-types = { version = "0.0.0", git = "https://github.com/mystenlabs/sui", package = "sui-json-rpc-types"}
 anyhow = "1.0"
 tokio = { version = "1.28.1", features = ["full"] }
 async-trait = "0.1.68"
