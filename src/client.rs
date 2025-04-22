@@ -1,5 +1,5 @@
 use anyhow::Result;
-use sui_json_rpc_types::{DynamicFieldPage, SuiCoinMetadata, SuiObjectDataOptions, SuiObjectResponse};
+use sui_json_rpc_types::{Balance, DynamicFieldPage, SuiCoinMetadata, SuiObjectDataOptions, SuiObjectResponse};
 use std::sync::Arc;
 use sui_sdk::{SuiClient, SuiClientBuilder};
 use sui_sdk::types::base_types::SuiAddress;
@@ -84,5 +84,16 @@ impl SuiQueryZClient {
     /// * `Result<CoinMetadata>` - The metadata for the coin or an error
     pub async fn get_coin_metadata(&self, coin_type: &str) -> Result<SuiCoinMetadata> {
         self.coin_metadata_client.get_metadata(coin_type).await
+    }
+
+    pub async fn get_coin_balance(&self, address: SuiAddress, coin_type: &str) -> Result<u64> {
+        let balance = self.sui_client.coin_read_api().get_all_balances(address).await?;
+        let coin_balance = balance.iter().find(|balance| balance.coin_type == coin_type).map(|balance| balance.total_balance).unwrap_or(0);
+        Ok(coin_balance as u64)
+    }
+
+    pub async fn get_coin_balances(&self, address: SuiAddress) -> Result<Vec<Balance>> {
+        let balance = self.sui_client.coin_read_api().get_all_balances(address).await?;
+        Ok(balance)
     }
 } 

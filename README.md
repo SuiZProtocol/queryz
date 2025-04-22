@@ -30,8 +30,8 @@ use sui_types::base_types::ObjectID;
 async fn main() -> Result<()> {
     // Connect to Sui RPC endpoint
     let rpc_url = "https://fullnode.mainnet.sui.io:443";
-    let client = SuiClient::new(rpc_url).await?;
-    
+    let client = SuiQueryZClient::new(rpc_url).await?;
+
     // Example bag object ID (replace with a real bag object ID)
     let bag_id_str = "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
     let bag_id = bag_id_str.parse::<ObjectID>()?;

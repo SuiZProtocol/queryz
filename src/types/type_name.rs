@@ -4,7 +4,7 @@ use sui_types::TypeTag;
 
 use crate::utils::coin::format_coin_address;
 
-#[derive(Debug, Serialize, Deserialize, Clone, Eq, Default, Hash)]
+#[derive(Debug, Serialize, Deserialize, Clone, Eq, Default)]
 pub struct TypeName {
     pub name: String,
 }
