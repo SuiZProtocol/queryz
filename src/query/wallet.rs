@@ -57,6 +57,11 @@ impl WalletQuery {
     pub async fn get_wallet_balances_by_coin_types(&self, address: &str, coin_types: Vec<String>) -> Result<HashMap<String, f64>> {
         let mut balances = HashMap::new();
         for coin_type in coin_types {
+            let coin_type = if coin_type == "0x0000000000000000000000000000000000000000000000000000000000000002::sui::SUI" {
+                "0x2::sui::SUI".to_string()
+            } else {
+                coin_type
+            };
             let balance = self.get_balance_by_coin_type(address, &coin_type).await?;
             balances.insert(coin_type, balance);
         }
