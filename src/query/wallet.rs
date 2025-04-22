@@ -29,6 +29,24 @@ impl WalletQuery {
 
         Ok(balances_map)
     }
+
+    pub async fn process_all_balances(&self, balances: HashMap<String, u64>) -> Result<HashMap<String, f64>> {
+        let mut processed_balances = HashMap::new();
+
+        for (coin_type, balance) in balances {
+            let metadata = self.client.get_coin_metadata(&coin_type).await?;
+            let actual_balance = balance as f64 / 10.0_f64.powi(metadata.decimals as i32);
+            processed_balances.insert(metadata.symbol, actual_balance);
+        }
+
+        Ok(processed_balances)
+    }
+
+    pub async fn get_wallet_balances(&self, address: &str) -> Result<HashMap<String, f64>> {
+        let balances = self.get_all_balances(address).await?;
+        let processed_balances = self.process_all_balances(balances).await?;
+        Ok(processed_balances)
+    }
 }
 
 #[async_trait]
@@ -40,13 +58,13 @@ pub trait WalletQuerier {
     ///
     /// # Returns
     /// * `Result<HashMap<String, u64>>` - The balances in the wallet or an error
-    async fn get_all_balances(&self, address: &str) -> Result<HashMap<String, u64>>;
+    async fn get_wallet_balances(&self, address: &str) -> Result<HashMap<String, f64>>;
 }
 
 #[async_trait]
 impl WalletQuerier for SuiQueryZClient {
-    async fn get_all_balances(&self, address: &str) -> Result<HashMap<String, u64>> {
+    async fn get_wallet_balances(&self, address: &str) -> Result<HashMap<String, f64>> {
         let query = WalletQuery::new(Arc::new(self.clone()));
-        query.get_all_balances(address).await
+        query.get_wallet_balances(address).await
     }
 } 

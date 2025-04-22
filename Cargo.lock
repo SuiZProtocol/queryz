@@ -4777,7 +4777,7 @@ dependencies = [
 
 [[package]]
 name = "queryz"
-version = "0.1.2"
+version = "0.1.4"
 dependencies = [
  "anyhow",
  "async-trait",
