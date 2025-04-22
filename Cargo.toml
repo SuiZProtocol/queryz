@@ -1,6 +1,6 @@
 [package]
 name = "queryz"
-version = "0.1.5"
+version = "0.1.6"
 edition = "2021"
 description = "A utility library for querying complex objects on the Sui blockchain. Build by SUIZ Protocol."
 license = "MIT"

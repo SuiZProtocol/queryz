@@ -4,6 +4,8 @@ use sui_types::base_types::ObjectID;
 /// Represents a balance entry in a Sui Bag
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Balancez {
+    /// The coin type (e.g., "SUI")
+    pub symbol: String,
     /// The coin type (e.g., "0x2::sui::SUI")
     pub coin_type: String,
     /// The balance amount

@@ -94,9 +94,9 @@ impl BagQuery {
             let metadata = self.client.get_coin_metadata(&field.name.to_string()).await?;
 
             let actual_balance = field.value.value() as f64 / 10.0_f64.powi(metadata.decimals as i32);
-            let symbol = metadata.symbol;
             let balance = Balancez {
-                coin_type: symbol,
+                symbol: metadata.symbol,
+                coin_type: field.name.to_string(),
                 balance: actual_balance,
             };
             balances.push(balance);
@@ -114,7 +114,7 @@ impl BagQuery {
     /// * `Result<BagBalances>` - The balances in the Bag or an error
     pub async fn get_bag_balances(&self, bag_id: ObjectID) -> Result<BagBalances> {
         let fields: Vec<Field<TypeName, Coin>> = self.get_bag_raw_fields(bag_id).await?;
-        Ok(self.process_bag_balances(bag_id, fields).await?)
+        self.process_bag_balances(bag_id, fields).await
     }
 }
 
